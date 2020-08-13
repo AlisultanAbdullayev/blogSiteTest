@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<div class="container mt-5">
+    <h1>Site's Blog</h1></br>
+
+    <form method="post" th:action="filter" class="form-inline">
+        <input type="text"  th:name="filter" class="form-control mr-sm-2" placeholder="Search by author">
+        <button type="submit" class="btn btn-outline-dark my-2 my-sm-0">Search</button>
+    </form></br>
+
+    <div th:each="el : ${posts}" class="alert alert-info mt-2">
+        <h3 th:text="${el.title}"/>
+        <p th:text="${el.anons}"/>
+        <h5><b>Author: </b> <span th:text="${el.author}"/></h5>
+        <h6><b>Published: </b> <span th:text="${el.period}"/></h6>
+        <a th:href="'/blog/' + ${el.id}" class="btn btn-info">Details</a>
+    </div>
+
+</div>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>
